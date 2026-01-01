@@ -35,6 +35,12 @@ function mapGeminiModelToOpenRouter(model: string): string {
     'gemini-1.5-flash': 'google/gemini-flash-1.5',
   };
 
+  // If the model already contains a slash or doesn't start with "gemini-",
+  // use it as-is (for custom models like MiniMax, etc.)
+  if (model.includes('/') || !model.startsWith('gemini-')) {
+    return model;
+  }
+
   return modelMap[model] || `google/${model}`;
 }
 
