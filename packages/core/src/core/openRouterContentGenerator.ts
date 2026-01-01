@@ -282,15 +282,15 @@ function convertTools(
   tools?: ToolListUnion,
 ): OpenAI.Chat.ChatCompletionTool[] | undefined {
   if (!tools) return undefined;
-  
+
   // Normalize tools to array
   const toolsArray = Array.isArray(tools) ? tools : [tools];
   if (toolsArray.length === 0) return undefined;
-  
+
   // Get the first tool (usually only one tool object with function declarations)
   const firstTool = toolsArray[0];
   if (!firstTool || typeof firstTool === 'string') return undefined;
-  
+
   const functionDeclarations = (firstTool as GenaiTool).functionDeclarations;
   if (!functionDeclarations) return undefined;
 
